@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import CardProduct from "../components/CardProduct";
-const API = 'https://dummyjson.com/products/category/';
-import { useParams } from 'react-router-dom'
+const API = 'https://dummyjson.com/products/category/vehicle';
 
-const Categoria = () => {
-
-  const param = useParams()
-  const URI = API + param.slug
+const Vehiculos = () => {
   const [datos, setDatos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const getDatos = async () => {
     try {
-      const response = await fetch(URI);
+      const response = await fetch(API);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -28,7 +23,7 @@ const Categoria = () => {
   };
   useEffect(() => {
     getDatos();
-  }, [param.slug]); //PARAMENTRO
+  }, []);
   if (loading) {
     return (
       <div className="text-center py-5">
@@ -49,17 +44,19 @@ const Categoria = () => {
   }
 
 
-
   return (
     <div className="container">
-      <h3 className='text-center py-4' >{param.slug} </h3>
+      <h4 className="text-center py-4">Moviles {datos.length}</h4>
       <div className="row">
         {datos.map((item) => (
           <CardProduct key={item.id} item={item}/>
         ))}
+
+
+
       </div>
     </div>
   )
 }
 
-export default Categoria
+export default Vehiculos
