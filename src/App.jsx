@@ -12,12 +12,19 @@ import Vehiculos from './pages/Vehiculos'
 import Motos from './pages/Motos'
 import Categoria from './pages/Categoria'
 import Busquedas from './pages/Busquedas'
+import TopHeader from './components/TopHeader'
+import DolarProvider from './contexts/DolarProvider'
+import CarritoProvider from './contexts/CarritoProvider'
+
 
 
 const App = () => {
   return (
+    <DolarProvider>
+    <CarritoProvider>
     <BrowserRouter>
     <div className='app'>
+      <TopHeader/>
       <Header/>
       <Routes>
         <Route path='/' element={<Inicio/>} />
@@ -36,6 +43,8 @@ const App = () => {
       <Footer/>
     </div>
     </BrowserRouter>
+    </CarritoProvider>
+    </DolarProvider>
   )
 }
 
